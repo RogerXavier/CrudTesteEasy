@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TalentosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conhecimento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tecnologia" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conhecimento_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pessoa_id" Type="int" />
+          <Property Name="conhecimento_id" Type="int" />
+          <Property Name="nivel" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Horario_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pessoa_id" Type="int" />
+          <Property Name="horario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="skype" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="linkedin" Type="varchar" MaxLength="15" />
+          <Property Name="cidade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="portfolio" Type="text" />
+          <Property Name="salario_por_hora" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="experiencia_tecnologia" Type="text" />
+          <Property Name="link_crud" Type="text" />
+        </EntityType>
+        <EntityType Name="Tempo_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pessoa_id" Type="int" />
+          <Property Name="tempo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Trabalho_Horario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="horario" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trabalho_Tempo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tempo" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Conhecime__conhe__3F466844">
+          <End Role="Conhecimento" Type="Self.Conhecimento" Multiplicity="0..1" />
+          <End Role="Conhecimento_Pessoa" Type="Self.Conhecimento_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conhecimento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conhecimento_Pessoa">
+              <PropertyRef Name="conhecimento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Conhecime__pesso__3E52440B">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Conhecimento_Pessoa" Type="Self.Conhecimento_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conhecimento_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario_P__horar__4316F928">
+          <End Role="Trabalho_Horario" Type="Self.Trabalho_Horario" Multiplicity="0..1" />
+          <End Role="Horario_Pessoa" Type="Self.Horario_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabalho_Horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_Pessoa">
+              <PropertyRef Name="horario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario_P__pesso__4222D4EF">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Horario_Pessoa" Type="Self.Horario_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tempo_Pes__pesso__45F365D3">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Tempo_Pessoa" Type="Self.Tempo_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tempo_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tempo_Pes__tempo__46E78A0C">
+          <End Role="Trabalho_Tempo" Type="Self.Trabalho_Tempo" Multiplicity="0..1" />
+          <End Role="Tempo_Pessoa" Type="Self.Tempo_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabalho_Tempo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tempo_Pessoa">
+              <PropertyRef Name="tempo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TalentosModelStoreContainer">
+          <EntitySet Name="Conhecimento" EntityType="Self.Conhecimento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conhecimento_Pessoa" EntityType="Self.Conhecimento_Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario_Pessoa" EntityType="Self.Horario_Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tempo_Pessoa" EntityType="Self.Tempo_Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trabalho_Horario" EntityType="Self.Trabalho_Horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trabalho_Tempo" EntityType="Self.Trabalho_Tempo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Conhecime__conhe__3F466844" Association="Self.FK__Conhecime__conhe__3F466844">
+            <End Role="Conhecimento" EntitySet="Conhecimento" />
+            <End Role="Conhecimento_Pessoa" EntitySet="Conhecimento_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Conhecime__pesso__3E52440B" Association="Self.FK__Conhecime__pesso__3E52440B">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Conhecimento_Pessoa" EntitySet="Conhecimento_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario_P__horar__4316F928" Association="Self.FK__Horario_P__horar__4316F928">
+            <End Role="Trabalho_Horario" EntitySet="Trabalho_Horario" />
+            <End Role="Horario_Pessoa" EntitySet="Horario_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario_P__pesso__4222D4EF" Association="Self.FK__Horario_P__pesso__4222D4EF">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Horario_Pessoa" EntitySet="Horario_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tempo_Pes__pesso__45F365D3" Association="Self.FK__Tempo_Pes__pesso__45F365D3">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Tempo_Pessoa" EntitySet="Tempo_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tempo_Pes__tempo__46E78A0C" Association="Self.FK__Tempo_Pes__tempo__46E78A0C">
+            <End Role="Trabalho_Tempo" EntitySet="Trabalho_Tempo" />
+            <End Role="Tempo_Pessoa" EntitySet="Tempo_Pessoa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TalentosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conhecimento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tecnologia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conhecimento_Pessoa" Relationship="Self.FK__Conhecime__conhe__3F466844" FromRole="Conhecimento" ToRole="Conhecimento_Pessoa" />
+        </EntityType>
+        <EntityType Name="Conhecimento_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pessoa_id" Type="Int32" />
+          <Property Name="conhecimento_id" Type="Int32" />
+          <Property Name="nivel" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conhecimento" Relationship="Self.FK__Conhecime__conhe__3F466844" FromRole="Conhecimento_Pessoa" ToRole="Conhecimento" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK__Conhecime__pesso__3E52440B" FromRole="Conhecimento_Pessoa" ToRole="Pessoa" />
+        </EntityType>
+        <EntityType Name="Horario_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pessoa_id" Type="Int32" />
+          <Property Name="horario_id" Type="Int32" />
+          <NavigationProperty Name="Trabalho_Horario" Relationship="Self.FK__Horario_P__horar__4316F928" FromRole="Horario_Pessoa" ToRole="Trabalho_Horario" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK__Horario_P__pesso__4222D4EF" FromRole="Horario_Pessoa" ToRole="Pessoa" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="skype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="linkedin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="portfolio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="salario_por_hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="experiencia_tecnologia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="link_crud" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Conhecimento_Pessoa" Relationship="Self.FK__Conhecime__pesso__3E52440B" FromRole="Pessoa" ToRole="Conhecimento_Pessoa" />
+          <NavigationProperty Name="Horario_Pessoa" Relationship="Self.FK__Horario_P__pesso__4222D4EF" FromRole="Pessoa" ToRole="Horario_Pessoa" />
+          <NavigationProperty Name="Tempo_Pessoa" Relationship="Self.FK__Tempo_Pes__pesso__45F365D3" FromRole="Pessoa" ToRole="Tempo_Pessoa" />
+        </EntityType>
+        <EntityType Name="Tempo_Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pessoa_id" Type="Int32" />
+          <Property Name="tempo_id" Type="Int32" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK__Tempo_Pes__pesso__45F365D3" FromRole="Tempo_Pessoa" ToRole="Pessoa" />
+          <NavigationProperty Name="Trabalho_Tempo" Relationship="Self.FK__Tempo_Pes__tempo__46E78A0C" FromRole="Tempo_Pessoa" ToRole="Trabalho_Tempo" />
+        </EntityType>
+        <EntityType Name="Trabalho_Horario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="horario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Horario_Pessoa" Relationship="Self.FK__Horario_P__horar__4316F928" FromRole="Trabalho_Horario" ToRole="Horario_Pessoa" />
+        </EntityType>
+        <EntityType Name="Trabalho_Tempo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tempo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tempo_Pessoa" Relationship="Self.FK__Tempo_Pes__tempo__46E78A0C" FromRole="Trabalho_Tempo" ToRole="Tempo_Pessoa" />
+        </EntityType>
+        <Association Name="FK__Conhecime__conhe__3F466844">
+          <End Role="Conhecimento" Type="Self.Conhecimento" Multiplicity="0..1" />
+          <End Role="Conhecimento_Pessoa" Type="Self.Conhecimento_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conhecimento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conhecimento_Pessoa">
+              <PropertyRef Name="conhecimento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Conhecime__pesso__3E52440B">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Conhecimento_Pessoa" Type="Self.Conhecimento_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conhecimento_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario_P__horar__4316F928">
+          <End Role="Trabalho_Horario" Type="Self.Trabalho_Horario" Multiplicity="0..1" />
+          <End Role="Horario_Pessoa" Type="Self.Horario_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabalho_Horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_Pessoa">
+              <PropertyRef Name="horario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario_P__pesso__4222D4EF">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Horario_Pessoa" Type="Self.Horario_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tempo_Pes__pesso__45F365D3">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="Tempo_Pessoa" Type="Self.Tempo_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tempo_Pessoa">
+              <PropertyRef Name="pessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tempo_Pes__tempo__46E78A0C">
+          <End Role="Trabalho_Tempo" Type="Self.Trabalho_Tempo" Multiplicity="0..1" />
+          <End Role="Tempo_Pessoa" Type="Self.Tempo_Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabalho_Tempo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tempo_Pessoa">
+              <PropertyRef Name="tempo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TalentosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conhecimento" EntityType="Self.Conhecimento" />
+          <EntitySet Name="Conhecimento_Pessoa" EntityType="Self.Conhecimento_Pessoa" />
+          <EntitySet Name="Horario_Pessoa" EntityType="Self.Horario_Pessoa" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+          <EntitySet Name="Tempo_Pessoa" EntityType="Self.Tempo_Pessoa" />
+          <EntitySet Name="Trabalho_Horario" EntityType="Self.Trabalho_Horario" />
+          <EntitySet Name="Trabalho_Tempo" EntityType="Self.Trabalho_Tempo" />
+          <AssociationSet Name="FK__Conhecime__conhe__3F466844" Association="Self.FK__Conhecime__conhe__3F466844">
+            <End Role="Conhecimento" EntitySet="Conhecimento" />
+            <End Role="Conhecimento_Pessoa" EntitySet="Conhecimento_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Conhecime__pesso__3E52440B" Association="Self.FK__Conhecime__pesso__3E52440B">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Conhecimento_Pessoa" EntitySet="Conhecimento_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario_P__horar__4316F928" Association="Self.FK__Horario_P__horar__4316F928">
+            <End Role="Trabalho_Horario" EntitySet="Trabalho_Horario" />
+            <End Role="Horario_Pessoa" EntitySet="Horario_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario_P__pesso__4222D4EF" Association="Self.FK__Horario_P__pesso__4222D4EF">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Horario_Pessoa" EntitySet="Horario_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tempo_Pes__pesso__45F365D3" Association="Self.FK__Tempo_Pes__pesso__45F365D3">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Tempo_Pessoa" EntitySet="Tempo_Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tempo_Pes__tempo__46E78A0C" Association="Self.FK__Tempo_Pes__tempo__46E78A0C">
+            <End Role="Trabalho_Tempo" EntitySet="Trabalho_Tempo" />
+            <End Role="Tempo_Pessoa" EntitySet="Tempo_Pessoa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TalentosModelStoreContainer" CdmEntityContainer="TalentosEntities">
+          <EntitySetMapping Name="Conhecimento">
+            <EntityTypeMapping TypeName="TalentosModel.Conhecimento">
+              <MappingFragment StoreEntitySet="Conhecimento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tecnologia" ColumnName="tecnologia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conhecimento_Pessoa">
+            <EntityTypeMapping TypeName="TalentosModel.Conhecimento_Pessoa">
+              <MappingFragment StoreEntitySet="Conhecimento_Pessoa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pessoa_id" ColumnName="pessoa_id" />
+                <ScalarProperty Name="conhecimento_id" ColumnName="conhecimento_id" />
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horario_Pessoa">
+            <EntityTypeMapping TypeName="TalentosModel.Horario_Pessoa">
+              <MappingFragment StoreEntitySet="Horario_Pessoa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pessoa_id" ColumnName="pessoa_id" />
+                <ScalarProperty Name="horario_id" ColumnName="horario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pessoa">
+            <EntityTypeMapping TypeName="TalentosModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="skype" ColumnName="skype" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="linkedin" ColumnName="linkedin" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="portfolio" ColumnName="portfolio" />
+                <ScalarProperty Name="salario_por_hora" ColumnName="salario_por_hora" />
+                <ScalarProperty Name="experiencia_tecnologia" ColumnName="experiencia_tecnologia" />
+                <ScalarProperty Name="link_crud" ColumnName="link_crud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tempo_Pessoa">
+            <EntityTypeMapping TypeName="TalentosModel.Tempo_Pessoa">
+              <MappingFragment StoreEntitySet="Tempo_Pessoa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pessoa_id" ColumnName="pessoa_id" />
+                <ScalarProperty Name="tempo_id" ColumnName="tempo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trabalho_Horario">
+            <EntityTypeMapping TypeName="TalentosModel.Trabalho_Horario">
+              <MappingFragment StoreEntitySet="Trabalho_Horario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trabalho_Tempo">
+            <EntityTypeMapping TypeName="TalentosModel.Trabalho_Tempo">
+              <MappingFragment StoreEntitySet="Trabalho_Tempo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tempo" ColumnName="tempo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

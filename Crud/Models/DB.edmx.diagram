@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd6cc3f7b5c04defb48fb3490a4a20e9" Name="Diagram1">
+        <EntityTypeShape EntityType="TalentosModel.Conhecimento" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Conhecimento_Pessoa" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Horario_Pessoa" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Pessoa" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Tempo_Pessoa" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Trabalho_Horario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TalentosModel.Trabalho_Tempo" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="TalentosModel.FK__Conhecime__conhe__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="TalentosModel.FK__Conhecime__pesso__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="TalentosModel.FK__Horario_P__horar__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="TalentosModel.FK__Horario_P__pesso__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="TalentosModel.FK__Tempo_Pes__pesso__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TalentosModel.FK__Tempo_Pes__tempo__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

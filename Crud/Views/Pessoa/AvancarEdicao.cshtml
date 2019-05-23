@@ -1,0 +1,81 @@
+﻿@model Crud.Models.ViewModels.PessoaViewModel
+@{
+    ViewBag.Title = "Novo Talento";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Editar", "Pessoa", FormMethod.Post))
+{
+    <div class="row">
+        <div class="cold-md-12">
+
+            <div>
+                <br />
+                Rate yourself from 0 to 5 for the knowledge specified below, and that's okay if you do not know many things, the important thing is to be honest! / Avalie-se de 0 a 5 quanto aos conhecimentos especificados abaixo, e tudo bem se não souber de muitas coisas, o importante é que seja sincero!
+                <br />
+                @for (int i = 0; i < Model.ConhecimentoList.Count; i++)
+                {
+                    <h3>
+                        @Html.DisplayFor(x => Model.ConhecimentoList[i].Tecnologia)
+                    </h3>
+                    <strong>Nao conheco / I don't know</strong>
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 0, Model.ConhecimentoList[i].Nivel == "0" ? true : false)
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 1, Model.ConhecimentoList[i].Nivel == "1" ? true : false)
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 2, Model.ConhecimentoList[i].Nivel == "2" ? true : false)
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 3, Model.ConhecimentoList[i].Nivel == "3" ? true : false)
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 4, Model.ConhecimentoList[i].Nivel == "4" ? true : false)
+                    @Html.RadioButton("Model.ConhecimentoList[" + i + "].Nivel", 5, Model.ConhecimentoList[i].Nivel == "5" ? true : false)
+
+                    @Html.Hidden("Model.ConhecimentoList[" + i + "].Id", Model.ConhecimentoList[i].Id)
+                    @Html.Hidden("Model.ConhecimentoList[" + i + "].Tecnologia", Model.ConhecimentoList[i].Tecnologia)
+
+                    <strong>Senior</strong>
+                    <br />
+                }
+                <br />
+            </div>
+
+            <dixv>
+                @Html.LabelFor(x => x.ExperienciaTecnologia)
+                @Html.TextBox("Model.ExperienciaTecnologia", Model.ExperienciaTecnologia)
+            </dixv>
+
+            <div>
+                @Html.LabelFor(x => x.LinkCrud)<br />
+                @Html.TextBox("Model.LinkCrud", Model.LinkCrud)
+            </div>
+
+            @Html.Hidden("Model.Email", Model.Email)
+            @Html.Hidden("Model.Nome", Model.Nome)
+            @Html.Hidden("Model.Skype", Model.Skype)
+            @Html.Hidden("Model.Telefone", Model.Telefone)
+            @Html.Hidden("Model.Linkedin", Model.Linkedin)
+            @Html.Hidden("Model.Cidade", Model.Cidade)
+            @Html.Hidden("Model.Estado", Model.Estado)
+            @Html.Hidden("Model.Portfolio", Model.Portfolio)
+
+            @for (int i = 0; i < Model.TrabalhoTempoList.Count; i++)
+            {
+                @Html.Hidden("Model.TrabalhoTempoList[" + i + "].Id", Model.TrabalhoTempoList[i].Id)
+                @Html.Hidden("Model.TrabalhoTempoList[" + i + "].Tempo", Model.TrabalhoTempoList[i].Tempo)
+                @Html.Hidden("Model.TrabalhoTempoList[" + i + "].IsSelected", Model.TrabalhoTempoList[i].IsSelected)
+            }
+
+            @for (int i = 0; i < Model.TrabalhoHorarioList.Count; i++)
+            {
+                @Html.Hidden("Model.TrabalhoHorarioList[" + i + "].Id", Model.TrabalhoHorarioList[i].Id)
+                @Html.Hidden("Model.TrabalhoHorarioList[" + i + "].Horario", Model.TrabalhoHorarioList[i].Horario)
+                @Html.Hidden("Model.TrabalhoHorarioList[" + i + "].IsSelected", Model.TrabalhoHorarioList[i].IsSelected)
+            }
+
+            @Html.Hidden("Model.SalarioPorHora", Model.SalarioPorHora)
+            @Html.Hidden("Model.Id", Model.Id)
+            <br />
+            <div style="text-align:right">
+                <input value="Voltar" name="comando" class="btn btn-warning" type="submit" />
+                <input value="Salvar" class="btn btn-success" type="submit" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,107 @@
+﻿@model Crud.Models.ViewModels.PessoaViewModel
+@{
+    ViewBag.Title = "Novo Talento";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Avancar", "Pessoa", FormMethod.Post))
+{
+    <div class="row">
+        <div class="cold-md-12">
+
+            <div>
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, "", new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Nome)
+                @Html.TextBoxFor(x => x.Nome, "", new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor(x => x.Nome, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Skype)
+                @Html.TextBoxFor(x => x.Skype, "", new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor(x => x.Skype, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Telefone)
+                @Html.TextBoxFor(x => x.Telefone, "", new { @class = "form-control", maxlength = 15 })
+                @Html.ValidationMessageFor(x => x.Telefone, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Linkedin)
+                @Html.TextBoxFor(x => x.Linkedin, "", new { @class = "form-control", maxlength = 15 })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Cidade)
+                @Html.TextBoxFor(x => x.Cidade, "", new { @class = "form-control", maxlength = 50 })
+                @Html.ValidationMessageFor(x => x.Cidade, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Estado)
+                @Html.TextBoxFor(x => x.Estado, "", new { @class = "form-control", maxlength = 30 })
+                @Html.ValidationMessageFor(x => x.Estado, null, new { @class = "validando" })
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.Portfolio)
+                @Html.TextBoxFor(x => x.Portfolio, "", new { @class = "form-control" })
+            </div>
+
+            <div>
+                <br />
+                @Html.LabelFor(x => x.TrabalhoTempoList)
+
+                <br />
+                @for (int i = 0; i < Model.TrabalhoTempoList.Count; i++)
+                {
+                    @Html.HiddenFor(m => Model.TrabalhoTempoList[i].Id)
+                    @Html.HiddenFor(m => Model.TrabalhoTempoList[i].Tempo)
+                    @Html.CheckBoxFor(m => Model.TrabalhoTempoList[i].IsSelected)
+                    @Html.DisplayFor(m => Model.TrabalhoTempoList[i].Tempo)
+                    <br />
+                }
+                <br />
+            </div>
+
+            <div>
+                <br />
+                @Html.LabelFor(x => x.TrabalhoHorarioList)
+                <br />
+                @for (int i = 0; i < Model.TrabalhoHorarioList.Count; i++)
+                {
+                    @Html.HiddenFor(m => Model.TrabalhoHorarioList[i].Id)
+                    @Html.HiddenFor(m => Model.TrabalhoHorarioList[i].Horario)
+                    @Html.CheckBoxFor(m => Model.TrabalhoHorarioList[i].IsSelected)
+                    @Html.DisplayFor(m => Model.TrabalhoHorarioList[i].Horario)
+                    <br />
+                }
+                <br />
+            </div>
+
+            <div>
+                @Html.LabelFor(x => x.SalarioPorHora)
+                @Html.TextBoxFor(x => x.SalarioPorHora, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.SalarioPorHora, null, new { @class = "validando" })
+            </div>
+            @for (int i = 0; i < Model.ConhecimentoList.Count; i++)
+            {
+                @Html.HiddenFor(c => Model.ConhecimentoList[i].Id)
+                @Html.HiddenFor(c => Model.ConhecimentoList[i].Tecnologia)
+                @Html.HiddenFor(c => Model.ConhecimentoList[i].Nivel)
+            }
+            <br />
+            <div style="text-align:right">
+                <input value="Avançar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
